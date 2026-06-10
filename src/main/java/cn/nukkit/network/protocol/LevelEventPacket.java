@@ -44,6 +44,7 @@ public class LevelEventPacket extends DataPacket {
     public static final int EVENT_SOUND_CAMERA_TAKE_PICTURE = 1050;
     public static final int EVENT_SOUND_EXPERIENCE_ORB = 1051;
     public static final int EVENT_SOUND_BLOCK_PLACE = 1052;
+    public static final int EVENT_SOUND_TOTEM = 1056;
 
     public static final int EVENT_GUARDIAN_CURSE = 2006;
     

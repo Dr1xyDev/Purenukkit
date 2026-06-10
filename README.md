@@ -12,11 +12,12 @@ Java 11 installation
 - `update-alternatives --config java`, choose /usr/lib/jvm/java-11-openjdk-amd64/jre/bin/java
 - Check java version: `java -version`
 
-Building
+Building - Compilation
 -------------
 - `./gradlew build --no-daemon`
 - Jar file (Pure.jar) is located in build/libs
 
 Running
 -------------
-- `java -Xmx1G -jar Rooti.jar`
+- run in console termux and vps
+- `java -Xmx1G -jar Pure.jar`

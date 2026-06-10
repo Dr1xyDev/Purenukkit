@@ -28,8 +28,8 @@ public class TaigaBiome extends SnowyBiome {
 
         this.addPopulator(tallGrass);
 
-        this.setBaseHeight(0.2f);
-        this.setHeightVariation(0.2f);
+        this.setBaseHeight(0.3f);
+        this.setHeightVariation(0.15f);
 
         this.temperature = 0.05;
         this.rainfall = 0.8;

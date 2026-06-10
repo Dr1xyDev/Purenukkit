@@ -553,6 +553,8 @@ public class Item implements Cloneable {
 
     public static final int SHULKER_SHELL = 445;
 
+    public static final int TOTEM = 450;
+
     public static final int BEETROOT = 457;
     public static final int BEETROOT_SEEDS = 458;
     public static final int BEETROOT_SEED = 458;
@@ -797,6 +799,8 @@ public class Item implements Cloneable {
             list[ELYTRA] = ItemElytra.class; //444
 
             //TODO: list[SHULKER_SHELL] = ItemShulkerShell.class; //445
+
+            list[TOTEM] = ItemTotem.class; //450
 
             list[BEETROOT] = ItemBeetroot.class; //457
             list[BEETROOT_SEEDS] = ItemSeedsBeetroot.class; //458
@@ -1285,6 +1289,7 @@ public class Item implements Cloneable {
         addCreativeItem(Item.get(Item.APPLE, 0));
         addCreativeItem(Item.get(Item.GOLDEN_APPLE, 0));
         addCreativeItem(Item.get(Item.GOLDEN_APPLE_ENCHANTED, 0));
+        addCreativeItem(Item.get(Item.TOTEM, 0));
         addCreativeItem(Item.get(Item.RAW_FISH, 0));
         addCreativeItem(Item.get(Item.RAW_SALMON, 0));
         addCreativeItem(Item.get(Item.CLOWNFISH, 0));

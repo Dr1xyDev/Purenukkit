@@ -4251,6 +4251,45 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     @Override
     public void setHealth(float health) {
         if (health < 1) {
+            // Totem of Undying check: if the player would die and has a totem in offhand or main hand
+            if (this.isAlive() && health <= 0) {
+                Item offhandItem = this.getOffhandInventory().getItem(0);
+                Item mainHandItem = this.inventory.getItemInHand();
+                boolean hasTotemOffhand = offhandItem != null && offhandItem.getId() == Item.TOTEM;
+                boolean hasTotemMainHand = mainHandItem != null && mainHandItem.getId() == Item.TOTEM;
+
+                if (hasTotemOffhand || hasTotemMainHand) {
+                    // Consume the totem
+                    if (hasTotemOffhand) {
+                        offhandItem.count--;
+                        this.getOffhandInventory().setItem(0, offhandItem.count > 0 ? offhandItem : Item.get(Item.AIR, 0, 0));
+                    } else {
+                        mainHandItem.count--;
+                        this.inventory.setItemInHand(mainHandItem.count > 0 ? mainHandItem : Item.get(Item.AIR, 0, 0));
+                    }
+
+                    // Set health to 1 instead of dying
+                    health = 1;
+
+                    // Apply totem effects (vanilla behavior)
+                    // Regeneration II (amplifier 1) for 45 seconds (900 ticks)
+                    this.addEffect(Effect.getEffect(Effect.REGENERATION).setAmplifier(1).setDuration(900).setVisible(true));
+                    // Absorption II (amplifier 1) for 20 seconds (400 ticks)
+                    this.addEffect(Effect.getEffect(Effect.ABSORPTION).setAmplifier(1).setDuration(400).setVisible(true));
+                    // Fire Resistance I (amplifier 0) for 40 seconds (800 ticks)
+                    this.addEffect(Effect.getEffect(Effect.FIRE_RESISTANCE).setAmplifier(0).setDuration(800).setVisible(true));
+
+                    // Send totem animation to the player
+                    EntityEventPacket pk = new EntityEventPacket();
+                    pk.eid = this.id;
+                    pk.event = EntityEventPacket.CONSUME_TOTEM;
+                    pk.unknown = 0;
+                    this.dataPacket(pk);
+
+                    // Extinguish fire if burning
+                    this.extinguish();
+                }
+            }
             health = 0;
         }
 
